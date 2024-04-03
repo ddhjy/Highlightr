@@ -40,6 +40,8 @@ open class Highlightr
     private let spanEnd = "/span>"
     private let htmlEscape = try! NSRegularExpression(pattern: "&#?[a-zA-Z0-9]+?;", options: .caseInsensitive)
     
+    public static var themeManager: ThemeManager = DefaultThemeManager()
+    
     /**
      Default init method.
 
@@ -87,14 +89,8 @@ open class Highlightr
     @discardableResult
     open func setTheme(to name: String) -> Bool
     {
-        guard let defTheme = bundle.path(forResource: name+".min", ofType: "css") else
-        {
-            return false
-        }
-        let themeString = try! String.init(contentsOfFile: defTheme)
-        theme =  Theme(themeString: themeString)
-
-        
+        guard let theme = Self.themeManager.theme(for: name) else { return false }
+        self.theme = theme
         return true
     }
     
@@ -261,4 +257,18 @@ open class Highlightr
         return resultString
     }
     
+}
+
+struct DefaultThemeManager: ThemeManager {
+    func theme(for name: String) -> Theme? {
+        #if SWIFT_PACKAGE
+        let bundle = Bundle.module
+        #else
+        let bundle = Bundle(for: Highlightr.self)
+        #endif
+        guard let defTheme = bundle.path(forResource: name+".min", ofType: "css") 
+        else { return nil }
+        guard let themeString = try? String.init(contentsOfFile: defTheme) else { return nil }
+        return Theme(themeString: themeString)
+    }
 }
