@@ -141,11 +141,11 @@ open class Theme {
             {
                 var style = style
 
-                if styleList.contains("hljs-title") && (styleList.contains("hljs-function") || styleList.contains("function_")) && themeDict["hljs-function-hljs-title"] != nil {
+                if ((styleList.contains("hljs-title") && styleList.contains("hljs-function")) || styleList.contains("hljs-title function_")) && themeDict["hljs-function-hljs-title"] != nil {
                     style = "hljs-function-hljs-title"
                 }
 
-                if styleList.contains("hljs-title") && (styleList.contains("hljs-class") || styleList.contains("class_")) && themeDict["hljs-class-hljs-title"] != nil {
+                if ((styleList.contains("hljs-title") && styleList.contains("hljs-class")) || styleList.contains("hljs-title class_")) && themeDict["hljs-class-hljs-title"] != nil {
                     style = "hljs-class-hljs-title"
                 }
 
