@@ -347,7 +347,7 @@ open class Theme {
         }
         
         
-        var r:UInt64 = 0, g:UInt64 = 0, b:UInt64 = 0, a:UInt64 = 1;
+        var r:UInt64 = 0, g:UInt64 = 0, b:UInt64 = 0, a:CGFloat = 1;
         var divisor : CGFloat
         
         if (cString.count == 6 )
@@ -372,8 +372,9 @@ open class Theme {
             Scanner(string: rString).scanHexInt64(&r)
             Scanner(string: gString).scanHexInt64(&g)
             Scanner(string: bString).scanHexInt64(&b)
-            Scanner(string: aString).scanHexInt64(&a)
-            a /= 255
+            var alpha: UInt64 = 0
+            Scanner(string: aString).scanHexInt64(&alpha)
+            a = CGFloat(alpha) / 255
             
             divisor = 255.0
         }else {
@@ -388,7 +389,7 @@ open class Theme {
             divisor = 15.0
         }
         
-        return RPColor(srgbRed: CGFloat(r) / divisor, green: CGFloat(g) / divisor, blue: CGFloat(b) / divisor, alpha: CGFloat(a))
+        return RPColor(srgbRed: CGFloat(r) / divisor, green: CGFloat(g) / divisor, blue: CGFloat(b) / divisor, alpha: a)
         
     }
     
