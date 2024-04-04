@@ -141,11 +141,11 @@ open class Theme {
             {
                 var style = style
 
-                if styleList.contains("hljs-title") && styleList.contains("hljs-function") && themeDict["hljs-function-hljs-title"] != nil {
+                if styleList.contains("hljs-title") && (styleList.contains("hljs-function") || styleList.contains("function_")) && themeDict["hljs-function-hljs-title"] != nil {
                     style = "hljs-function-hljs-title"
                 }
 
-                if styleList.contains("hljs-title") && styleList.contains("hljs-class") && themeDict["hljs-class-hljs-title"] != nil {
+                if styleList.contains("hljs-title") && (styleList.contains("hljs-class") || styleList.contains("class_")) && themeDict["hljs-class-hljs-title"] != nil {
                     style = "hljs-class-hljs-title"
                 }
 
@@ -208,11 +208,11 @@ open class Theme {
             let keyArray = keys.replacingOccurrences(of: " ", with: ",").components(separatedBy: ",")
             for key in keyArray {
                 var key = key
-                if keyArray.contains(".hljs-title") && keyArray.contains(".hljs-function") {
+                if keyArray.contains(".hljs-title") && (keyArray.contains(".hljs-function") || keyArray.contains(".function_")) {
                     key = "hljs-function-hljs-title"
                 }
 
-                if keyArray.contains(".hljs-title") && keyArray.contains(".hljs-class") {
+                if keyArray.contains(".hljs-title") && (keyArray.contains(".hljs-class") || keyArray.contains(".class_")) {
                     key = "hljs-class-hljs-title"
                 }
 
