@@ -331,11 +331,11 @@ open class Theme {
             case "black":
                 return RPColor(white: 0, alpha: 1)
             case "red":
-                return RPColor(red: 1, green: 0, blue: 0, alpha: 1)
+                return RPColor(srgbRed: 1, green: 0, blue: 0, alpha: 1)
             case "green":
-                return RPColor(red: 0, green: 1, blue: 0, alpha: 1)
+                return RPColor(srgbRed: 0, green: 1, blue: 0, alpha: 1)
             case "blue":
-                return RPColor(red: 0, green: 0, blue: 1, alpha: 1)
+                return RPColor(srgbRed: 0, green: 0, blue: 1, alpha: 1)
             default:
                 return RPColor.gray
             }
@@ -387,7 +387,7 @@ open class Theme {
             divisor = 15.0
         }
         
-        return RPColor(red: CGFloat(r) / divisor, green: CGFloat(g) / divisor, blue: CGFloat(b) / divisor, alpha: CGFloat(a) / divisor)
+        return RPColor(srgbRed: CGFloat(r) / divisor, green: CGFloat(g) / divisor, blue: CGFloat(b) / divisor, alpha: CGFloat(a) / divisor)
         
     }
     
