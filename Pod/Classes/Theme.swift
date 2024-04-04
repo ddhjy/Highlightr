@@ -373,6 +373,7 @@ open class Theme {
             Scanner(string: gString).scanHexInt64(&g)
             Scanner(string: bString).scanHexInt64(&b)
             Scanner(string: aString).scanHexInt64(&a)
+            a /= 255
             
             divisor = 255.0
         }else {
@@ -387,7 +388,7 @@ open class Theme {
             divisor = 15.0
         }
         
-        return RPColor(srgbRed: CGFloat(r) / divisor, green: CGFloat(g) / divisor, blue: CGFloat(b) / divisor, alpha: CGFloat(a) / divisor)
+        return RPColor(srgbRed: CGFloat(r) / divisor, green: CGFloat(g) / divisor, blue: CGFloat(b) / divisor, alpha: CGFloat(a))
         
     }
     
