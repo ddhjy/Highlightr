@@ -341,13 +341,13 @@ open class Theme {
             }
         }
         
-        if (cString.count != 6 && cString.count != 3 )
+        if (cString.count != 6 && cString.count != 3 && cString.count != 8)
         {
             return RPColor.gray
         }
         
         
-        var r:UInt64 = 0, g:UInt64 = 0, b:UInt64 = 0;
+        var r:UInt64 = 0, g:UInt64 = 0, b:UInt64 = 0, a:UInt64 = 1;
         var divisor : CGFloat
         
         if (cString.count == 6 )
@@ -363,8 +363,19 @@ open class Theme {
             
             divisor = 255.0
             
-        }else
-        {
+        }else if (cString.count == 8) {
+            let rString = (cString as NSString).substring(to: 2)
+            let gString = ((cString as NSString).substring(from: 2) as NSString).substring(to: 2)
+            let bString = ((cString as NSString).substring(from: 4) as NSString).substring(to: 2)
+            let aString = ((cString as NSString).substring(from: 6) as NSString).substring(to: 2)
+            
+            Scanner(string: rString).scanHexInt64(&r)
+            Scanner(string: gString).scanHexInt64(&g)
+            Scanner(string: bString).scanHexInt64(&b)
+            Scanner(string: aString).scanHexInt64(&a)
+            
+            divisor = 255.0
+        }else {
             let rString = (cString as NSString).substring(to: 1)
             let gString = ((cString as NSString).substring(from: 1) as NSString).substring(to: 1)
             let bString = ((cString as NSString).substring(from: 2) as NSString).substring(to: 1)
@@ -376,7 +387,7 @@ open class Theme {
             divisor = 15.0
         }
         
-        return RPColor(red: CGFloat(r) / divisor, green: CGFloat(g) / divisor, blue: CGFloat(b) / divisor, alpha: CGFloat(1))        
+        return RPColor(red: CGFloat(r) / divisor, green: CGFloat(g) / divisor, blue: CGFloat(b) / divisor, alpha: CGFloat(a) / divisor)
         
     }
     
